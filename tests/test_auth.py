@@ -1,6 +1,5 @@
 """First Test to make sure it runs locally"""
-import json
-from pprint import pprint
+
 
 from flask_jwt_extended import create_access_token, decode_token
 
@@ -24,15 +23,15 @@ def test_auth(client, create_user):
     token_value = decode_token(access_token)
     assert token_value['sub'] == 'testUser'
 
-
-def test_protected(client, create_user):
+def test_protected(client):
+    """Test User Protection"""
     with client.application.app_context():
         access_token = create_token()
     token_value = decode_token(access_token)
     username = token_value['sub']
     assert username == 'testUser'
     headers = {
-        'Authorization': 'Bearer {}'.format(access_token)
+        'Authorization': 'Bearer {}'.format(access_token) #pylint: disable=consider-using-f-string
     }
     response = client.get('/user_info', headers=headers)
     response_data = response.get_json()
@@ -40,6 +39,7 @@ def test_protected(client, create_user):
 
 
 def create_token():
+    """Test Creating Access Token"""
     user = User.query.first()
     access_token = create_access_token(user.username)
     return access_token

@@ -21,6 +21,7 @@ def application():
 
 @pytest.fixture()
 def create_user(application):
+    """This creates the user"""
     with application.app_context():
         user = User(username="testUser", password="test")
         db.session.add(user)

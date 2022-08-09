@@ -2,9 +2,9 @@
 
 # Project 2
 
-Name:
+Name: Christina DeRosa
 
-UCID:
+UCID: cmd58
 
 ## Introduction
 
